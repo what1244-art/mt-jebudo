@@ -124,7 +124,9 @@
   .cm-form{display:flex;flex-direction:column;gap:7px;}
   .cm-form .row{display:flex;gap:7px;}
   .cm-form input,.cm-form textarea{font-family:inherit;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13.5px;width:100%;resize:vertical;}
+  .cm-form select{font-family:inherit;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13.5px;}
   .cm-form input.nm{flex:0 0 110px;}
+  .cm-item .tp{display:inline-block;background:var(--sea);color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:1px 7px;margin-right:6px;}
   .cm-form textarea{flex:1;min-height:42px;}
   .cm-form button{background:var(--sea);color:#fff;border:none;border-radius:9px;padding:9px 16px;font-weight:700;font-size:13.5px;cursor:pointer;align-self:flex-end;}
   .cm-form button:disabled{opacity:.5;}
@@ -305,7 +307,29 @@
     <div class="recipe"><b>방식:</b> 1등 조 → 가벼운/원하는 당번 우선 선택 → 순위대로 픽 → 꼴찌 조가 남은 당번. 조 단위 배정 후 조원끼리 분담.</div>
   </section>
 
-  <div class="foot">🌊 교육대학원 MT 검토 · 2026.06.27–28 · 제부도 신성민박펜션<br>각 항목의 💬 버튼으로 의견을 남기면 셋이 함께 봅니다.</div>
+  <!-- 의견 게시판 -->
+  <section id="talk">
+    <div class="sec-h"><span class="em">💬</span>의견 나누기</div>
+    <div class="lead-line">항목 선택 후 의견을 남기면 셋이 실시간으로 함께 봅니다.</div>
+    <div class="cm-form">
+      <div class="row">
+        <select id="c-topic">
+          <option>예산</option>
+          <option>준비물</option>
+          <option>일정</option>
+          <option>메뉴</option>
+          <option>컨텐츠</option>
+          <option>전체/기타</option>
+        </select>
+        <input id="c-name" class="nm" maxlength="12" placeholder="이름" />
+      </div>
+      <textarea id="c-text" maxlength="500" placeholder="이 항목 어떤지 의견을 남겨주세요"></textarea>
+      <button type="button" id="c-submit">등록</button>
+    </div>
+    <div class="cm-list" id="c-list"><div class="cm-empty">아직 의견이 없어요. 먼저 남겨보세요!</div></div>
+  </section>
+
+  <div class="foot">🌊 교육대학원 MT 검토 · 2026.06.27–28 · 제부도 신성민박펜션</div>
 </div>
 
 <nav class="quicknav">
@@ -314,6 +338,7 @@
   <a href="#schedule"><span class="ic">🕐</span>일정</a>
   <a href="#menu"><span class="ic">🍖</span>메뉴</a>
   <a href="#content"><span class="ic">🎯</span>컨텐츠</a>
+  <a href="#talk"><span class="ic">💬</span>의견</a>
 </nav>
 
 <div class="toast" id="toast"></div>
@@ -335,42 +360,21 @@
     document.querySelectorAll('section[id]').forEach(function(s){ io.observe(s); });
   }
 
-  // 각 섹션에 의견(댓글) 위젯 부착 — 항상 실행
-  var widgets = {};
-  document.querySelectorAll('section').forEach(function(sec, i){
-    var h = sec.querySelector('.sec-h'); if(!h) return;
-    var label = h.textContent.replace(/[^0-9A-Za-z가-힣 ]/g,'').trim();
-    var topic = 's'+i+':'+label;
-    var btn = document.createElement('button');
-    btn.className = 'cm-btn';
-    btn.innerHTML = '💬 의견 <span class="cm-count">0</span>';
-    h.appendChild(btn);
-    var panel = document.createElement('div');
-    panel.className = 'cm-panel';
-    panel.innerHTML = '<div class="cm-list"><div class="cm-empty">아직 의견이 없어요. 먼저 남겨보세요!</div></div>'
-      + '<div class="cm-form"><div class="row"><input class="nm" maxlength="12" placeholder="이름" />'
-      + '<textarea maxlength="500" placeholder="이 항목 어떤지 의견을 남겨주세요"></textarea></div>'
-      + '<button type="button">등록</button></div>';
-    sec.appendChild(panel);
-    btn.addEventListener('click', function(){ panel.classList.toggle('open'); });
-    widgets[topic] = {
-      list: panel.querySelector('.cm-list'),
-      countEl: btn.querySelector('.cm-count'),
-      btn: btn, count: 0,
-      nameInput: panel.querySelector('.nm'),
-      textInput: panel.querySelector('textarea'),
-      submit: panel.querySelector('button')
-    };
-  });
+  // 의견 게시판 (HTML 고정 — 항상 보임)
+  var F = {
+    topic: document.getElementById('c-topic'),
+    name: document.getElementById('c-name'),
+    text: document.getElementById('c-text'),
+    submit: document.getElementById('c-submit'),
+    list: document.getElementById('c-list')
+  };
 
   function showSetup(){
-    Object.keys(widgets).forEach(function(k){
-      widgets[k].list.innerHTML = '<div class="cm-setup">💬 의견 기능 활성화 준비 중입니다. 곧 열려요!</div>';
-      widgets[k].submit.disabled = true;
-    });
+    if(F.list) F.list.innerHTML = '<div class="cm-setup">💬 의견 기능 활성화 준비 중입니다. 곧 열려요!</div>';
+    if(F.submit) F.submit.disabled = true;
   }
 
-  // ▼▼▼ Firebase 설정값 — 콘솔에서 복사해 붙여넣기 ▼▼▼
+  // ▼▼▼ Firebase 설정값 ▼▼▼
   var firebaseConfig = {
     apiKey: "AIzaSyBBthmZzkxRMaYgnIqeoNELuw2JPyxPd84",
     authDomain: "mtgogo-13e6e.firebaseapp.com",
@@ -379,9 +383,9 @@
     messagingSenderId: "58814941767",
     appId: "1:58814941767:web:768fe9adbb4b5fe7fcff62"
   };
-  // ▲▲▲ 여기까지 ▲▲▲
+  // ▲▲▲
 
-  if(String(firebaseConfig.apiKey).indexOf('PASTE') > -1){ showSetup(); return; }
+  if(!F.submit || String(firebaseConfig.apiKey).indexOf('PASTE') > -1){ showSetup(); return; }
 
   function loadScript(src, cb){ var s=document.createElement('script'); s.src=src; s.onload=cb; s.onerror=function(){ showSetup(); }; document.head.appendChild(s); }
 
@@ -390,32 +394,26 @@
       try {
         firebase.initializeApp(firebaseConfig);
         var db = firebase.firestore();
-        Object.keys(widgets).forEach(function(topic){
-          var w = widgets[topic];
-          w.submit.addEventListener('click', function(){
-            var name = (w.nameInput.value||'').trim() || '익명';
-            var text = (w.textInput.value||'').trim();
-            if(!text){ toast('내용을 입력해주세요'); return; }
-            w.submit.disabled = true;
-            db.collection('comments').add({ topic:topic, name:name, text:text, ts: firebase.firestore.FieldValue.serverTimestamp() })
-              .then(function(){ w.textInput.value=''; toast('✅ 의견을 남겼습니다 — 셋이 함께 봅니다'); })
-              .catch(function(e){ toast('등록 실패 — 잠시 후 다시'); console.error(e); })
-              .then(function(){ w.submit.disabled = false; });
-          });
+        F.submit.addEventListener('click', function(){
+          var topic = F.topic.value || '전체/기타';
+          var name = (F.name.value||'').trim() || '익명';
+          var text = (F.text.value||'').trim();
+          if(!text){ toast('내용을 입력해주세요'); return; }
+          F.submit.disabled = true;
+          db.collection('comments').add({ topic:topic, name:name, text:text, ts: firebase.firestore.FieldValue.serverTimestamp() })
+            .then(function(){ F.text.value=''; toast('✅ 의견을 남겼습니다 — 셋이 함께 봅니다'); })
+            .catch(function(e){ toast('등록 실패 — 잠시 후 다시'); console.error(e); })
+            .then(function(){ F.submit.disabled = false; });
         });
-        var first = true;
         db.collection('comments').orderBy('ts').onSnapshot(function(snap){
-          var byTopic = {};
-          snap.forEach(function(doc){ var d=doc.data(); (byTopic[d.topic]=byTopic[d.topic]||[]).push(d); });
-          Object.keys(widgets).forEach(function(topic){
-            var w = widgets[topic]; var arr = byTopic[topic] || [];
-            w.list.innerHTML = arr.length
-              ? arr.map(function(c){ return '<div class="cm-item"><span class="tm">'+fmt(c.ts)+'</span><span class="nm">'+esc(c.name)+'</span><div class="tx">'+esc(c.text)+'</div></div>'; }).join('')
-              : '<div class="cm-empty">아직 의견이 없어요. 먼저 남겨보세요!</div>';
-            if(!first && arr.length > w.count){ w.btn.classList.remove('pulse'); void w.btn.offsetWidth; w.btn.classList.add('pulse'); }
-            w.count = arr.length; w.countEl.textContent = arr.length;
-          });
-          first = false;
+          var items = [];
+          snap.forEach(function(doc){ items.push(doc.data()); });
+          if(!items.length){ F.list.innerHTML = '<div class="cm-empty">아직 의견이 없어요. 먼저 남겨보세요!</div>'; return; }
+          items.reverse();
+          F.list.innerHTML = items.map(function(c){
+            var tp = String(c.topic||'기타').replace(/^s\d+:/,'');
+            return '<div class="cm-item"><span class="tm">'+fmt(c.ts)+'</span><span class="tp">'+esc(tp)+'</span><span class="nm">'+esc(c.name)+'</span><div class="tx">'+esc(c.text)+'</div></div>';
+          }).join('');
         });
       } catch(e){ console.error(e); showSetup(); }
     });
