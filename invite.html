@@ -54,6 +54,13 @@
   .no.sel{background:#d6dee2;box-shadow:0 0 0 3px rgba(120,140,150,.25);}
   .count{text-align:center;font-size:13px;color:#1b7fa6;font-weight:700;margin-top:11px;min-height:18px;}
   .note{text-align:center;font-size:11.5px;color:#9bb0b8;margin-top:9px;}
+  .pay{margin-top:12px;background:#fff7ef;border:1px dashed #ffb27a;border-radius:12px;padding:14px;text-align:center;display:none;}
+  .pay.show{display:block;}
+  .pay .pt{font-size:13.5px;color:#a85a2a;font-weight:700;margin-bottom:9px;}
+  .pay .acc{display:flex;align-items:center;justify-content:center;gap:8px;}
+  .pay .acc .num{font-size:18px;font-weight:800;color:#16323f;letter-spacing:.3px;}
+  .pay .acc button{background:#ff7a59;color:#fff;border:none;border-radius:8px;padding:7px 13px;font-weight:700;font-size:12.5px;cursor:pointer;}
+  .pay .sub{font-size:12px;color:#a07a55;margin-top:6px;}
   .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:#16323f;color:#fff;padding:12px 20px;border-radius:11px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.3s;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
@@ -81,6 +88,11 @@
         </div>
         <div class="count" id="count"></div>
         <div class="note">참석 여부만 눌러주세요 · 자세한 공지는 단톡방에서</div>
+        <div class="pay" id="pay">
+          <div class="pt">엠티비 <b>65,000원</b>을 입금해주세요 🙏</div>
+          <div class="acc"><span class="num" id="acc">3333-11-2457139</span><button id="copy">복사</button></div>
+          <div class="sub">카카오뱅크 · 예금주 권석주</div>
+        </div>
       </div>
     </div>
   </div>
@@ -92,6 +104,14 @@
   var toastEl=document.getElementById('toast');
   function toast(m){ toastEl.textContent=m; toastEl.classList.add('show'); setTimeout(function(){toastEl.classList.remove('show');},2600); }
   var nameEl=document.getElementById('name'), yes=document.getElementById('yes'), no=document.getElementById('no'), countEl=document.getElementById('count');
+  var payBox=document.getElementById('pay');
+  document.getElementById('copy').addEventListener('click', function(){
+    var num='3333112457139';
+    function done(){ toast('계좌번호 복사 완료'); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(num).then(done).catch(fallback); }
+    else fallback();
+    function fallback(){ var t=document.createElement('textarea'); t.value=num; document.body.appendChild(t); t.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(t); done(); }
+  });
 
   var firebaseConfig = {
     apiKey: "AIzaSyBBthmZzkxRMaYgnIqeoNELuw2JPyxPd84",
@@ -113,7 +133,10 @@
           if(!name){ toast('이름을 입력해주세요'); nameEl.focus(); return; }
           yes.classList.remove('sel'); no.classList.remove('sel'); btn.classList.add('sel');
           db.collection('comments').add({topic:'rsvp', name:name, text:status, ts:firebase.firestore.FieldValue.serverTimestamp()})
-            .then(function(){ toast(status==='참석'?'🙌 참석 신청 완료! 곧 만나요':'알려주셔서 감사해요'); })
+            .then(function(){
+              if(status==='참석'){ toast('🙌 참석 신청 완료! 곧 만나요'); payBox.classList.add('show'); }
+              else { toast('알려주셔서 감사해요'); payBox.classList.remove('show'); }
+            })
             .catch(function(e){ toast('전송 실패 — 잠시 후 다시'); console.error(e); });
         }
         yes.addEventListener('click', function(){ send('참석', yes); });
