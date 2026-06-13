@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>🎯 조별 미션 체크리스트 · 제부도 MT</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Jua&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  :root{--ink:#5a4636;--paper:#fffaf0;--pep:#ff6b52;--pink:#ff8fab;--sky:#5fc2e8;--yel:#ffcf4d;--mint:#43c59e;}
+  body{font-family:'Gaegu',cursive;color:var(--ink);background:#fdf3cf;
+    background-image:radial-gradient(#fde9b0 1.4px,transparent 1.4px);background-size:22px 22px;
+    min-height:100dvh;padding:18px 12px 40px;font-size:18px;line-height:1.5;}
+  .wrap{max-width:440px;margin:0 auto;}
+  .head{text-align:center;margin-bottom:14px;}
+  .head .t{font-family:'Jua',sans-serif;font-size:30px;color:var(--pep);}
+  .head .s{font-size:16px;color:#a99b7e;}
+
+  .card{background:var(--paper);border:3px dashed #e8b94a;border-radius:24px;padding:16px 15px;margin-bottom:14px;
+    box-shadow:0 8px 0 -3px #f6e3a8;}
+  .card .ct{font-family:'Jua',sans-serif;font-size:20px;color:var(--sky);margin-bottom:10px;text-align:center;}
+
+  /* 조 선택 */
+  .teams{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+  .teams button{font-family:'Jua',sans-serif;font-size:18px;border:2.5px solid #ffd98a;background:#fffdf6;color:var(--ink);
+    border-radius:14px;padding:9px 16px;cursor:pointer;}
+  .teams button.on{background:var(--pep);color:#fff;border-color:var(--pep);box-shadow:0 4px 0 #d8482f;}
+
+  /* 미션 리스트 */
+  .mtitle{text-align:center;font-family:'Jua',sans-serif;font-size:19px;color:var(--ink);margin:4px 0 10px;}
+  .mtitle b{color:var(--pep);}
+  .m{display:flex;align-items:center;gap:11px;background:#fffdf6;border:2px solid #ffe6b3;border-radius:16px;
+    padding:11px 13px;margin-bottom:8px;cursor:pointer;transition:.12s;}
+  .m.done{background:#eafaf3;border-color:#aee6d2;}
+  .m .ck{flex:0 0 26px;width:26px;height:26px;border:2.5px solid #ffc15c;border-radius:8px;display:flex;
+    align-items:center;justify-content:center;font-size:18px;color:#fff;background:#fff;}
+  .m.done .ck{background:var(--mint);border-color:var(--mint);}
+  .m .lb{flex:1;font-size:17px;}
+  .m.done .lb{color:#7bbfa5;text-decoration:line-through;}
+  .m .pt{font-family:'Jua',sans-serif;font-size:17px;color:var(--pep);}
+  .m.done .pt{color:var(--mint);}
+  .prog{text-align:center;font-family:'Jua',sans-serif;font-size:20px;color:var(--sky);margin-top:6px;}
+
+  /* 리더보드 */
+  .lead .lrow{display:flex;align-items:center;gap:10px;background:#fffdf6;border:2px solid #ffe6b3;border-radius:14px;
+    padding:9px 12px;margin-bottom:7px;}
+  .lead .rk{font-family:'Jua',sans-serif;font-size:19px;width:30px;color:var(--sky);text-align:center;}
+  .lead .nm{font-family:'Jua',sans-serif;font-size:18px;flex:0 0 56px;}
+  .lead .barwrap{flex:1;background:#fdeccb;border-radius:6px;height:12px;overflow:hidden;}
+  .lead .bar{height:12px;background:linear-gradient(90deg,#ffd24d,var(--pep));border-radius:6px;transition:width .4s;}
+  .lead .sc{font-family:'Jua',sans-serif;font-size:18px;color:var(--pep);width:54px;text-align:right;}
+
+  .rules{font-size:16px;color:#8a7c64;}
+  .rules b{color:var(--pep);}
+  .rules li{margin:4px 0 4px 4px;list-style:none;padding-left:16px;position:relative;}
+  .rules li::before{content:"✦";position:absolute;left:0;color:var(--yel);}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;
+    font-family:'Gaegu',cursive;font-weight:700;padding:12px 22px;border-radius:16px;font-size:18px;
+    box-shadow:0 10px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:.3s;z-index:99;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="t">🎯 조별 미션 체크리스트</div>
+    <div class="s">제부도 MT · 13:00~16:30 · 총 130점 만점 🏆</div>
+  </div>
+
+  <div class="card">
+    <div class="ct">우리 조 선택 👇</div>
+    <div class="teams" id="teams"></div>
+  </div>
+
+  <div class="card">
+    <div class="mtitle"><b id="cur-team">1조</b> 미션 체크</div>
+    <div id="mlist"></div>
+    <div class="prog" id="prog">0 / 130점</div>
+  </div>
+
+  <div class="card">
+    <div class="ct">🏆 실시간 순위</div>
+    <div class="lead" id="lead"></div>
+  </div>
+
+  <div class="card rules">
+    <div class="ct">📋 점수 규칙</div>
+    <ul>
+      <li>미션마다 <b>고정 점수</b> — 완료하면 그 점수 획득 (총 130점)</li>
+      <li>인증 = <b>단톡방에 사진/영상</b> 올리면 인정 → 여기서 체크</li>
+      <li>체크는 각 조가 직접, <b>운영진이 단톡 인증으로 최종 확인</b></li>
+      <li><b>1등 조 시상</b> 🏆 / 동점이면 먼저 다 완료한 조 우승</li>
+      <li>코스 팁: 매바위·빨간등대 / 모세의 기적 길 / 바다와풍경·배로와 카페</li>
+    </ul>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var MISSIONS=[
+    {id:'m1',label:'🦅 매바위/빨간등대 점프샷',pt:20},
+    {id:'m2',label:'☕ 바다뷰 카페 시그니처+단체샷',pt:15},
+    {id:'m3',label:'🌊 모세의 기적 배경 인증샷',pt:15},
+    {id:'m4',label:'🎬 조원 전원 5초 릴스',pt:25},
+    {id:'m5',label:'🧑‍🍳 현지 상인 맛집 추천 인증',pt:15},
+    {id:'m6',label:'🤳 교수님과 함께 셀카 (보너스)',pt:20},
+    {id:'m7',label:'🐚 예쁜 조개/소품 인증',pt:10},
+    {id:'m8',label:'📣 조 이름·구호 영상',pt:10}
+  ];
+  var TEAMS=['1조','2조','3조','4조'];
+  var TOTAL=MISSIONS.reduce(function(a,m){return a+m.pt;},0);
+  var cur='1조';
+  var state={}; // team -> {mid:true}
+  TEAMS.forEach(function(t){state[t]={};});
+
+  var toastEl=document.getElementById('toast');
+  function toast(m){toastEl.textContent=m;toastEl.classList.add('show');setTimeout(function(){toastEl.classList.remove('show');},2200);}
+
+  // 조 버튼
+  var teamsEl=document.getElementById('teams');
+  teamsEl.innerHTML=TEAMS.map(function(t){return '<button data-t="'+t+'">'+t+'</button>';}).join('');
+  function setTeam(t){cur=t;document.getElementById('cur-team').textContent=t;
+    [].forEach.call(teamsEl.children,function(b){b.classList.toggle('on',b.getAttribute('data-t')===t);});
+    renderMissions();}
+  teamsEl.addEventListener('click',function(e){var b=e.target.closest('button');if(b)setTeam(b.getAttribute('data-t'));});
+
+  var mlistEl=document.getElementById('mlist');
+  var db=null;
+  function renderMissions(){
+    var done=state[cur]||{};
+    mlistEl.innerHTML=MISSIONS.map(function(m){
+      var dn=!!done[m.id];
+      return '<div class="m'+(dn?' done':'')+'" data-m="'+m.id+'"><div class="ck">'+(dn?'✓':'')+'</div><div class="lb">'+m.label+'</div><div class="pt">'+m.pt+'</div></div>';
+    }).join('');
+    var sc=MISSIONS.reduce(function(a,m){return a+(done[m.id]?m.pt:0);},0);
+    document.getElementById('prog').textContent=sc+' / '+TOTAL+'점';
+  }
+  mlistEl.addEventListener('click',function(e){
+    var row=e.target.closest('.m'); if(!row||!db) return;
+    var mid=row.getAttribute('data-m');
+    var nowDone=!(state[cur][mid]);
+    db.collection('comments').add({topic:'mission',team:cur,mid:mid,text:nowDone?'done':'undone',ts:firebase.firestore.FieldValue.serverTimestamp()})
+      .then(function(){toast(nowDone?'✅ 미션 완료!':'체크 해제');})
+      .catch(function(e){toast('저장 실패 — 다시');console.error(e);});
+  });
+
+  function renderLead(){
+    var last={}; // team-> latest done ts(ms)
+    var arr=TEAMS.map(function(t){
+      var done=state[t]||{};
+      var sc=MISSIONS.reduce(function(a,m){return a+(done[m.id]?m.pt:0);},0);
+      return {t:t,sc:sc,ts:last[t]||0};
+    });
+    arr.sort(function(a,b){return b.sc-a.sc || a.ts-b.ts;});
+    var max=Math.max(TOTAL, arr[0]?arr[0].sc:0);
+    document.getElementById('lead').innerHTML=arr.map(function(r,i){
+      var rk=(i===0&&r.sc>0)?'🥇':(i===1&&r.sc>0)?'🥈':(i===2&&r.sc>0)?'🥉':(i+1);
+      return '<div class="lrow"><span class="rk">'+rk+'</span><span class="nm">'+r.t+'</span><span class="barwrap"><span class="bar" style="width:'+(r.sc/max*100)+'%"></span></span><span class="sc">'+r.sc+'점</span></div>';
+    }).join('');
+  }
+
+  setTeam('1조'); renderLead();
+
+  var firebaseConfig={apiKey:"AIzaSyBBthmZzkxRMaYgnIqeoNELuw2JPyxPd84",authDomain:"mtgogo-13e6e.firebaseapp.com",projectId:"mtgogo-13e6e",storageBucket:"mtgogo-13e6e.firebasestorage.app",messagingSenderId:"58814941767",appId:"1:58814941767:web:768fe9adbb4b5fe7fcff62"};
+  function load(src,cb){var s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);}
+  load('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js',function(){
+    load('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js',function(){
+      try{
+        firebase.initializeApp(firebaseConfig); db=firebase.firestore();
+        db.collection('comments').orderBy('ts').onSnapshot(function(snap){
+          TEAMS.forEach(function(t){state[t]={};});
+          snap.forEach(function(doc){var v=doc.data();
+            if(v.topic==='mission'&&v.team&&v.mid){
+              if(!state[v.team]) state[v.team]={};
+              state[v.team][v.mid]=(v.text==='done');
+            }
+          });
+          renderMissions(); renderLead();
+        });
+      }catch(e){console.error(e);}
+    });
+  });
+})();
+</script>
+</body>
+</html>
