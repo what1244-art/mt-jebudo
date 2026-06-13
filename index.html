@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>교육대학원 MT 검토 · 제부도 1박 2일</title>
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="교육대학원 MT 검토 · 제부도 1박 2일">
+<meta property="og:description" content="2026.6.27(토)~28(일) 제부도 MT 진행안 — 예산·준비물·일정·메뉴·컨텐츠. 각 항목에 의견 남겨주세요.">
+<meta property="og:image" content="https://what1244-art.github.io/mt-jebudo/og.png">
+<meta property="og:url" content="https://what1244-art.github.io/mt-jebudo/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="교육대학원 MT 검토 · 제부도 1박 2일">
+<meta name="twitter:image" content="https://what1244-art.github.io/mt-jebudo/og.png">
+<style>
+  :root{
+    --deep:#0b3d5c; --sea:#1b7fa6; --aqua:#3fb8c4; --foam:#eaf6f8;
+    --ink:#16323f; --line:#cfe3e8; --accent:#ff7a59;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Apple SD Gothic Neo','Pretendard',-apple-system,'Malgun Gothic',sans-serif;
+    color:var(--ink); background:linear-gradient(180deg,#dff1f5,#eaf6f8 45%,#f7f1e2);
+    line-height:1.6; padding:26px 14px 70px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+
+  /* HERO */
+  .hero{position:relative;border-radius:22px;overflow:hidden;color:#fff;padding:34px 28px 52px;
+    background:linear-gradient(135deg,var(--deep),var(--sea) 55%,var(--aqua));box-shadow:0 12px 36px rgba(11,61,92,.26);}
+  .hero .tag{display:inline-block;background:rgba(255,255,255,.18);padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:700;letter-spacing:.5px;}
+  .hero h1{font-size:29px;margin:13px 0 6px;font-weight:800;letter-spacing:-.5px;}
+  .hero .date{font-size:16px;opacity:.95;font-weight:600;}
+  .hero .who{margin-top:12px;font-size:13px;opacity:.92;}
+  .waves{position:absolute;left:0;right:0;bottom:-2px;height:36px;}
+
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:-28px 14px 26px;position:relative;z-index:2;}
+  .chip{background:#fff;border-radius:13px;padding:11px 15px;box-shadow:0 6px 16px rgba(27,127,166,.13);flex:1 1 150px;min-width:140px;}
+  .chip .k{font-size:11px;color:var(--sea);font-weight:700;}
+  .chip .v{font-size:14.5px;font-weight:700;margin-top:2px;}
+
+  /* 사이드 바로가기 */
+  .quicknav{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:50;
+    display:flex;flex-direction:column;gap:8px;}
+  .quicknav a{display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none;
+    background:#fff;color:var(--sea);border:1px solid var(--line);border-radius:13px;
+    width:52px;padding:8px 0;font-size:10.5px;font-weight:700;box-shadow:0 4px 12px rgba(11,61,92,.12);transition:.18s;}
+  .quicknav a .ic{font-size:17px;}
+  .quicknav a:hover,.quicknav a.on{background:var(--sea);color:#fff;border-color:var(--sea);transform:translateX(-3px);}
+  @media(max-width:680px){
+    .quicknav{right:auto;left:0;top:auto;bottom:0;transform:none;flex-direction:row;width:100%;
+      gap:0;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(0,0,0,.08);}
+    .quicknav a{flex:1;border:none;border-radius:0;box-shadow:none;width:auto;}
+    .quicknav a:hover,.quicknav a.on{transform:none;}
+    body{padding-bottom:84px;}
+  }
+
+  section{background:#fff;border-radius:18px;padding:24px 22px;margin-bottom:18px;
+    box-shadow:0 7px 20px rgba(11,61,92,.07);scroll-margin-top:14px;}
+  .sec-h{display:flex;align-items:center;gap:9px;font-size:20px;font-weight:800;color:var(--deep);margin-bottom:15px;}
+  .sec-h .em{font-size:23px;}
+  .lead-line{font-size:13.5px;color:#5a7480;margin:-8px 0 16px;}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);}
+  th{background:var(--foam);color:var(--deep);font-weight:700;}
+  td.amt,th.amt{text-align:right;}
+  td.amt{font-weight:700;color:var(--sea);}
+  tr.total td{background:#fff6ef;font-weight:800;color:var(--accent);border-top:2px solid var(--accent);}
+  .tbl-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:12px;}
+  .tbl-wrap table th,.tbl-wrap table td{border-bottom:1px solid var(--line);}
+  .tbl-wrap table tr:last-child td{border-bottom:none;}
+
+  .pending{font-size:12.5px;color:#9a7b52;background:#fbf3e3;border-radius:10px;padding:10px 13px;margin-top:8px;}
+  .refund{font-size:13.5px;color:#1f7a52;background:#e6f7ee;border:1px solid #b3e6cc;border-radius:10px;padding:11px 14px;margin-top:8px;}
+  .tide{font-size:12.8px;color:#b04a2b;background:#fff4f0;border:1px solid #ffceba;border-radius:10px;padding:10px 13px;margin-bottom:14px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px;}
+  .card{background:var(--foam);border-radius:13px;padding:15px;border:1px solid var(--line);}
+  .card h4{font-size:14px;color:var(--deep);margin-bottom:8px;}
+  .card ul{list-style:none;font-size:13.5px;}
+  .card li{padding:3px 0 3px 15px;position:relative;color:#2b4a56;}
+  .card li::before{content:"·";position:absolute;left:3px;color:var(--aqua);font-weight:800;}
+
+  /* 타임라인 */
+  .day-label{display:inline-block;background:var(--sea);color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px;margin:16px 0 10px;}
+  .day-label.d2{background:var(--accent);}
+  .tl{list-style:none;border-left:3px solid var(--line);margin-left:7px;}
+  .tl li{position:relative;padding:0 0 15px 21px;}
+  .tl li:last-child{padding-bottom:0;}
+  .tl li::before{content:"";position:absolute;left:-9px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--aqua);border:3px solid #fff;box-shadow:0 0 0 2px var(--line);}
+  .tl li.hl::before{background:var(--accent);}
+  .tl .t{font-weight:800;color:var(--sea);font-size:13.5px;}
+  .tl .c{font-weight:600;font-size:14.5px;}
+  .tl .c .big{color:var(--accent);}
+  .tl .n{font-size:12.3px;color:#6b8591;}
+
+  .prog-h{font-size:15.5px;font-weight:800;color:var(--deep);margin:20px 0 5px;}
+  .prog-h .sub{font-weight:600;font-size:12.5px;color:#6b8591;}
+  .prog-p{font-size:13.5px;color:#3a5560;margin-bottom:12px;}
+  .mlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:7px;margin-bottom:8px;}
+  .mitem{display:flex;justify-content:space-between;gap:8px;background:var(--foam);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;color:#2b4a56;}
+  .recipe{background:var(--foam);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13px;color:#34525e;margin-top:8px;}
+  .recipe b{color:var(--deep);}
+
+  /* 댓글 */
+  .cm-btn{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--sea);background:var(--foam);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;transition:.2s;}
+  .cm-btn:hover{background:#dceef2;}
+  .cm-btn .cm-count{background:var(--sea);color:#fff;border-radius:999px;padding:1px 7px;font-size:11px;min-width:18px;text-align:center;}
+  .cm-btn.pulse{animation:cmpulse 1s ease 2;}
+  @keyframes cmpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,122,89,0);}50%{box-shadow:0 0 0 5px rgba(255,122,89,.35);background:#ffe7df;}}
+  .cm-panel{display:none;margin-top:16px;border-top:1px dashed var(--line);padding-top:14px;}
+  .cm-panel.open{display:block;}
+  .cm-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+  .cm-empty{font-size:13px;color:#9bb0b8;padding:6px 2px;}
+  .cm-item{background:var(--foam);border-radius:10px;padding:9px 12px;font-size:13.5px;}
+  .cm-item .nm{font-weight:800;color:var(--deep);margin-right:8px;}
+  .cm-item .tm{font-size:11px;color:#9bb0b8;float:right;}
+  .cm-item .tx{color:#2b4a56;margin-top:3px;white-space:pre-wrap;word-break:break-word;}
+  .cm-form{display:flex;flex-direction:column;gap:7px;}
+  .cm-form .row{display:flex;gap:7px;}
+  .cm-form input,.cm-form textarea{font-family:inherit;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13.5px;width:100%;resize:vertical;}
+  .cm-form input.nm{flex:0 0 110px;}
+  .cm-form textarea{flex:1;min-height:42px;}
+  .cm-form button{background:var(--sea);color:#fff;border:none;border-radius:9px;padding:9px 16px;font-weight:700;font-size:13.5px;cursor:pointer;align-self:flex-end;}
+  .cm-form button:disabled{opacity:.5;}
+  .cm-setup{background:#fff7ed;border:1px dashed #f0c089;border-radius:10px;padding:10px 13px;font-size:12.5px;color:#946a2b;}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#16323f;color:#fff;padding:13px 22px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 28px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:.3s;z-index:99;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  .foot{text-align:center;font-size:12.5px;color:#6b8591;padding:8px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">🎓 교육대학원 MT · 검토용</span>
+    <h1>제부도 1박 2일 — 이렇게 진행 어때요?</h1>
+    <div class="date">2026. 6. 27 (토) ~ 6. 28 (일) · 신성민박펜션</div>
+    <div class="who">대표 의견 공유 · 안주영(원우회장) · 권석주(조교) · 임혜림(MT위원장)</div>
+    <svg class="waves" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 20 Q150 0 300 20 T600 20 T900 20 T1200 20 V40 H0 Z" fill="#eaf6f8"/></svg>
+  </div>
+
+  <div class="chips">
+    <div class="chip"><div class="k">장소</div><div class="v">🌊 제부도 신성민박펜션</div></div>
+    <div class="chip"><div class="k">인원</div><div class="v">15~20명 (교수님 4분)</div></div>
+    <div class="chip"><div class="k">회비</div><div class="v">1인 6.5만원</div></div>
+    <div class="chip"><div class="k">이동</div><div class="v">개별 차량 + 카풀</div></div>
+  </div>
+
+  <!-- 1. 예산 -->
+  <section id="budget">
+    <div class="sec-h"><span class="em">💰</span>예산</div>
+    <div class="lead-line">숙소비 + 음식 구매비 + 준비물 구매비 등 전부 포함 · 회비 1인 6.5만원 한도 안에서 운영</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>항목</th><th class="amt">17명</th><th class="amt">20명</th></tr>
+        <tr><td>숙소비 (1박)</td><td class="amt">44만</td><td class="amt">47만</td></tr>
+        <tr><td>음식 구매비 (마트 장보기)</td><td class="amt">35만</td><td class="amt">40만</td></tr>
+        <tr><td>주류 · 음료</td><td class="amt">15만</td><td class="amt">18만</td></tr>
+        <tr><td>준비물 구매비 (폭죽·일회용·상품 등)</td><td class="amt">10만</td><td class="amt">12만</td></tr>
+        <tr class="total"><td>합계</td><td class="amt">104만</td><td class="amt">117만</td></tr>
+        <tr class="total"><td>1인 부담</td><td class="amt">≈6.1만</td><td class="amt">≈5.9만</td></tr>
+      </table>
+    </div>
+    <div class="pending">🏠 <b>숙소비:</b> 단체방 26만(8인) + 패밀리방 13만(4인) = 39만(12인 기준), 12인 초과 1인당 +1만 · 잔금 당일 현금/카드</div>
+    <div class="refund">💸 <b>엠티 종료 후 정산하고 남은 회비는 참석자에게 균등 환급(1/n)해드립니다.</b> 영수증 정리 후 처리.</div>
+  </section>
+
+  <!-- 2. 준비물 -->
+  <section id="prep">
+    <div class="sec-h"><span class="em">✅</span>준비물</div>
+    <div class="lead-line">마트에서 살 음식(메뉴 참고)은 제외 · 엠티 진행에 필요한 물품</div>
+    <div class="grid">
+      <div class="card">
+        <h4>🛍️ 미리 챙길 것</h4>
+        <ul>
+          <li>롤링페이퍼 카드 · 펜 (졸업생용)</li>
+          <li>친해지길 바래 — 제비뽑기 + 주제 카드</li>
+          <li>미션 우승 조 상품 (기프티콘)</li>
+          <li>블루투스 스피커</li>
+          <li>카풀 · 방 배정표</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>🔥 현장 물품</h4>
+        <ul>
+          <li>폭죽 · 라이터 · 토치</li>
+          <li>일회용품: 종이컵·접시·수저·집게·은박지·키친타월</li>
+          <li>쓰레기봉투 · 물티슈</li>
+          <li>충전기 · 멀티탭</li>
+          <li>상비약 (소화제·두통약·밴드)</li>
+          <li>수영복 / 여벌옷 (물놀이용)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 일정표 -->
+  <section id="schedule">
+    <div class="sec-h"><span class="em">🕐</span>일정표</div>
+    <div class="tide">🌊 <b>바닷길 통행:</b> 6/27(토) 만조 14:55 → 13~17시 통제 예상이라 <b>12:30까지 입도</b> / 6/28(일) 오전 11시 출차는 통행 OK · 확인 031-355-3924</div>
+
+    <div class="day-label">DAY 1 · 6/27 (토)</div>
+    <ul class="tl">
+      <li><div class="t">~12:30</div><div class="c">입도 · 체크인 · 방 배정 · 짐 풀기</div><div class="n">점심 각자 해결하고 옴 / 만조 전 입도</div></li>
+      <li class="hl"><div class="t">13:00</div><div class="c">🎯 <span class="big">조별 미션 투어</span></div><div class="n">제부도 돌며 미션 + 카페·바다 구경 (컨텐츠 참고)</div></li>
+      <li class="hl"><div class="t">16:30</div><div class="c">💞 <span class="big">친해지길 바래</span> (30분)</div><div class="n">랜덤 짝 토크, 교수님 포함</div></li>
+      <li><div class="t">17:00</div><div class="c">바베큐 세팅 — 당번 가동</div><div class="n">미션 순위로 정한 당번대로 / 교수님 면제</div></li>
+      <li class="hl"><div class="t">18:00</div><div class="c">🍖 <span class="big">바베큐 만찬 + 건배사</span></div><div class="n">일몰 19:35 자유 감상</div></li>
+      <li class="hl"><div class="t">19:30</div><div class="c">🎓 졸업생 선물(롤링페이퍼) 전달 + 한마디</div><div class="n">술자리 중 따뜻하게</div></li>
+      <li><div class="t">20:00</div><div class="c">🎆 폭죽 → 🔥 불멍 + 술자리 토크</div><div class="n">게임 없이 대화·음주, 교수님과 함께</div></li>
+      <li><div class="t">이후</div><div class="c">자유 취침</div><div class="n">음주조/조용조 방 분리</div></li>
+    </ul>
+
+    <div class="day-label d2">DAY 2 · 6/28 (일)</div>
+    <ul class="tl">
+      <li><div class="t">~09:30</div><div class="c">자율 기상 (늦잠 환영)</div></li>
+      <li><div class="t">10:00</div><div class="c">아침 — 컵라면 + 즉석밥 (해장)</div></li>
+      <li class="hl"><div class="t">10:40</div><div class="c">📸 단체사진 + 짐 정리</div></li>
+      <li><div class="t">11:00</div><div class="c">체크아웃 · 출도</div><div class="n">잔금 정산</div></li>
+      <li><div class="t">이후</div><div class="c">자율 해산 (점심 각자)</div></li>
+    </ul>
+  </section>
+
+  <!-- 4. 메뉴 -->
+  <section id="menu">
+    <div class="sec-h"><span class="em">🍖</span>메뉴</div>
+    <div class="lead-line">무엇을 먹을지 + 재료 + 간단 레시피</div>
+
+    <div class="prog-h">🍖 저녁 — 바베큐 (토)</div>
+    <div class="card">
+      <h4>재료</h4>
+      <ul>
+        <li>삼겹살 · 목살 7~8kg, 소시지/프랑크</li>
+        <li>상추 · 깻잎, 마늘 · 양파 · 버섯</li>
+        <li>김치, 쌈장 · 소금기름장, 슬라이스 치즈</li>
+        <li>즉석밥, 🍜 봉지라면(마무리용)</li>
+      </ul>
+    </div>
+    <div class="prog-h">🥘 김치찌개 (저녁 곁들임 · 요리 담당)</div>
+    <div class="card">
+      <h4>재료</h4>
+      <ul>
+        <li>잘 익은 김치, 돼지고기(삼겹 일부)</li>
+        <li>두부, 대파, 양파</li>
+        <li>고춧가루 · 다진 마늘 · 국간장 (간 조절용)</li>
+      </ul>
+    </div>
+    <div class="recipe">바베큐 고기 일부 떼어 <b>요리 담당</b>이 현장에서 끓임 — 든든한 국물 + 해장용으로 다음 날 아침까지 활용.</div>
+
+    <div class="prog-h">🌙 야식 (토)</div>
+    <div class="recipe">봉지라면 · 과자 · 과일(수박)</div>
+
+    <div class="prog-h">🌅 아침 — 일요일 (일)</div>
+    <div class="recipe">컵라면 + 즉석밥 (해장) · 누룽지 / 북엇국 추가 가능</div>
+
+    <div class="pending" style="margin-top:14px;">점심은 양일 모두 각자 해결 (단체 예산 없음). 제부도 맛집: 어가촌(칼국수)·만나수산(회/조개구이)·해품가·모세의기적.</div>
+  </section>
+
+  <!-- 5. 컨텐츠 세부 내용 -->
+  <section id="content">
+    <div class="sec-h"><span class="em">🎯</span>컨텐츠 세부 내용</div>
+    <div class="lead-line">1시 ~ 5시까지 진행하는 낮 프로그램 (5시 이후 식사·밤엔 게임 없이 먹고 마시고 토크)</div>
+
+    <div class="prog-h">1) 조별 미션 투어 <span class="sub">13:00 ~ 16:30</span></div>
+    <div class="prog-p">조별로 제부도를 돌며 미션 수행 → 핸드폰으로 인증(사진은 단톡방) → 끝나고 우승 조 시상 🏆<br>코스 팁: 매바위·빨간등대 / 모세의 기적 길 / 바다와풍경·배로와 카페.</div>
+    <div class="mlist">
+      <div class="mitem"><span>🦅 매바위/빨간등대 조원 전원 점프샷</span><span class="pt">20</span></div>
+      <div class="mitem"><span>☕ 바다뷰 카페 시그니처 + 조 단체샷</span><span class="pt">15</span></div>
+      <div class="mitem"><span>🌊 모세의 기적 배경 인증샷</span><span class="pt">15</span></div>
+      <div class="mitem"><span>🎬 조원 전원 5초 릴스</span><span class="pt">25</span></div>
+      <div class="mitem"><span>🧑‍🍳 현지 상인 맛집 추천 인증</span><span class="pt">15</span></div>
+      <div class="mitem"><span>🤳 교수님과 함께 셀카 (보너스)</span><span class="pt">20</span></div>
+      <div class="mitem"><span>🐚 예쁜 조개/소품 인증</span><span class="pt">10</span></div>
+      <div class="mitem"><span>📣 조 이름·구호 영상</span><span class="pt">10</span></div>
+    </div>
+
+    <div class="prog-h">2) 친해지길 바래 <span class="sub">16:30 ~ 17:00 · 교수님 포함</span></div>
+    <div class="card">
+      <ul>
+        <li>제비뽑기로 <b>랜덤 짝</b> 매칭 (교수님도 섞여서)</li>
+        <li><b>10분 × 3라운드</b> — 라운드마다 짝 교체 (스피드 토크)</li>
+        <li>짝마다 <b>주제 카드</b> 1장: "요즘 가장 행복했던 순간 / 교직을 택한 이유 / 인생 영화 / MT에 바라는 것"</li>
+        <li>목적: 평소 못 친해진 사람·교수님과 짧고 깊게</li>
+      </ul>
+    </div>
+
+    <div class="prog-h">3) 식사·운영 당번 정하기 <span class="sub">미션 결과로 (17:00 직전)</span></div>
+    <div class="prog-p">조별 미션 투어 <b>순위</b>로 당번을 드래프트 — 점수 높은 조부터 원하는 당번 먼저 선택, 꼴찌 조가 남은 당번. (교수님 제외)</div>
+    <div class="mlist">
+      <div class="mitem"><span>🥩 고기 굽기 (2~3명)</span></div>
+      <div class="mitem"><span>🍽️ 상 세팅 (쌈·반찬·수저)</span></div>
+      <div class="mitem"><span>👨‍🏫 교수님 상 세팅</span></div>
+      <div class="mitem"><span>🍲 요리 담당 (김치찌개·라면)</span></div>
+      <div class="mitem"><span>🛏️ 잠자리(이불) 펴기</span></div>
+      <div class="mitem"><span>♻️ 쓰레기 분리수거</span></div>
+      <div class="mitem"><span>♨️ 아침 물 끓이기 (컵라면)</span></div>
+    </div>
+    <div class="recipe"><b>방식:</b> 1등 조 → 가벼운/원하는 당번 우선 선택 → 순위대로 픽 → 꼴찌 조가 남은 당번. 조 단위 배정 후 조원끼리 분담.</div>
+  </section>
+
+  <div class="foot">🌊 교육대학원 MT 검토 · 2026.06.27–28 · 제부도 신성민박펜션<br>각 항목의 💬 버튼으로 의견을 남기면 셋이 함께 봅니다.</div>
+</div>
+
+<nav class="quicknav">
+  <a href="#budget"><span class="ic">💰</span>예산</a>
+  <a href="#prep"><span class="ic">✅</span>준비물</a>
+  <a href="#schedule"><span class="ic">🕐</span>일정</a>
+  <a href="#menu"><span class="ic">🍖</span>메뉴</a>
+  <a href="#content"><span class="ic">🎯</span>컨텐츠</a>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var toastEl = document.getElementById('toast');
+  function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); setTimeout(function(){ toastEl.classList.remove('show'); },2600); }
+  function pad(n){ return (n<10?'0':'')+n; }
+  function fmt(ts){ if(!ts||!ts.toDate) return ''; var d=ts.toDate(); return pad(d.getMonth()+1)+'/'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes()); }
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  // 스크롤 시 현재 섹션 버튼 강조
+  var navLinks = [].slice.call(document.querySelectorAll('.quicknav a'));
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ navLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href')==='#'+e.target.id); }); } });
+    }, {rootMargin:'-40% 0px -55% 0px'});
+    document.querySelectorAll('section[id]').forEach(function(s){ io.observe(s); });
+  }
+
+  // 각 섹션에 의견(댓글) 위젯 부착 — 항상 실행
+  var widgets = {};
+  document.querySelectorAll('section').forEach(function(sec, i){
+    var h = sec.querySelector('.sec-h'); if(!h) return;
+    var label = h.textContent.replace(/[^0-9A-Za-z가-힣 ]/g,'').trim();
+    var topic = 's'+i+':'+label;
+    var btn = document.createElement('button');
+    btn.className = 'cm-btn';
+    btn.innerHTML = '💬 의견 <span class="cm-count">0</span>';
+    h.appendChild(btn);
+    var panel = document.createElement('div');
+    panel.className = 'cm-panel';
+    panel.innerHTML = '<div class="cm-list"><div class="cm-empty">아직 의견이 없어요. 먼저 남겨보세요!</div></div>'
+      + '<div class="cm-form"><div class="row"><input class="nm" maxlength="12" placeholder="이름" />'
+      + '<textarea maxlength="500" placeholder="이 항목 어떤지 의견을 남겨주세요"></textarea></div>'
+      + '<button type="button">등록</button></div>';
+    sec.appendChild(panel);
+    btn.addEventListener('click', function(){ panel.classList.toggle('open'); });
+    widgets[topic] = {
+      list: panel.querySelector('.cm-list'),
+      countEl: btn.querySelector('.cm-count'),
+      btn: btn, count: 0,
+      nameInput: panel.querySelector('.nm'),
+      textInput: panel.querySelector('textarea'),
+      submit: panel.querySelector('button')
+    };
+  });
+
+  function showSetup(){
+    Object.keys(widgets).forEach(function(k){
+      widgets[k].list.innerHTML = '<div class="cm-setup">💬 의견 기능 활성화 준비 중입니다. 곧 열려요!</div>';
+      widgets[k].submit.disabled = true;
+    });
+  }
+
+  // ▼▼▼ Firebase 설정값 — 콘솔에서 복사해 붙여넣기 ▼▼▼
+  var firebaseConfig = {
+    apiKey: "AIzaSyBBthmZzkxRMaYgnIqeoNELuw2JPyxPd84",
+    authDomain: "mtgogo-13e6e.firebaseapp.com",
+    projectId: "mtgogo-13e6e",
+    storageBucket: "mtgogo-13e6e.firebasestorage.app",
+    messagingSenderId: "58814941767",
+    appId: "1:58814941767:web:768fe9adbb4b5fe7fcff62"
+  };
+  // ▲▲▲ 여기까지 ▲▲▲
+
+  if(String(firebaseConfig.apiKey).indexOf('PASTE') > -1){ showSetup(); return; }
+
+  function loadScript(src, cb){ var s=document.createElement('script'); s.src=src; s.onload=cb; s.onerror=function(){ showSetup(); }; document.head.appendChild(s); }
+
+  loadScript('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js', function(){
+    loadScript('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js', function(){
+      try {
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+        Object.keys(widgets).forEach(function(topic){
+          var w = widgets[topic];
+          w.submit.addEventListener('click', function(){
+            var name = (w.nameInput.value||'').trim() || '익명';
+            var text = (w.textInput.value||'').trim();
+            if(!text){ toast('내용을 입력해주세요'); return; }
+            w.submit.disabled = true;
+            db.collection('comments').add({ topic:topic, name:name, text:text, ts: firebase.firestore.FieldValue.serverTimestamp() })
+              .then(function(){ w.textInput.value=''; toast('✅ 의견을 남겼습니다 — 셋이 함께 봅니다'); })
+              .catch(function(e){ toast('등록 실패 — 잠시 후 다시'); console.error(e); })
+              .then(function(){ w.submit.disabled = false; });
+          });
+        });
+        var first = true;
+        db.collection('comments').orderBy('ts').onSnapshot(function(snap){
+          var byTopic = {};
+          snap.forEach(function(doc){ var d=doc.data(); (byTopic[d.topic]=byTopic[d.topic]||[]).push(d); });
+          Object.keys(widgets).forEach(function(topic){
+            var w = widgets[topic]; var arr = byTopic[topic] || [];
+            w.list.innerHTML = arr.length
+              ? arr.map(function(c){ return '<div class="cm-item"><span class="tm">'+fmt(c.ts)+'</span><span class="nm">'+esc(c.name)+'</span><div class="tx">'+esc(c.text)+'</div></div>'; }).join('')
+              : '<div class="cm-empty">아직 의견이 없어요. 먼저 남겨보세요!</div>';
+            if(!first && arr.length > w.count){ w.btn.classList.remove('pulse'); void w.btn.offsetWidth; w.btn.classList.add('pulse'); }
+            w.count = arr.length; w.countEl.textContent = arr.length;
+          });
+          first = false;
+        });
+      } catch(e){ console.error(e); showSetup(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
