@@ -307,28 +307,6 @@
     <div class="recipe"><b>방식:</b> 1등 조 → 가벼운/원하는 당번 우선 선택 → 순위대로 픽 → 꼴찌 조가 남은 당번. 조 단위 배정 후 조원끼리 분담.</div>
   </section>
 
-  <!-- 의견 게시판 -->
-  <section id="talk">
-    <div class="sec-h"><span class="em">💬</span>의견 나누기</div>
-    <div class="lead-line">항목 선택 후 의견을 남기면 셋이 실시간으로 함께 봅니다.</div>
-    <div class="cm-form">
-      <div class="row">
-        <select id="c-topic">
-          <option>예산</option>
-          <option>준비물</option>
-          <option>일정</option>
-          <option>메뉴</option>
-          <option>컨텐츠</option>
-          <option>전체/기타</option>
-        </select>
-        <input id="c-name" class="nm" maxlength="12" placeholder="이름" />
-      </div>
-      <textarea id="c-text" maxlength="500" placeholder="이 항목 어떤지 의견을 남겨주세요"></textarea>
-      <button type="button" id="c-submit">등록</button>
-    </div>
-    <div class="cm-list" id="c-list"><div class="cm-empty">아직 의견이 없어요. 먼저 남겨보세요!</div></div>
-  </section>
-
   <div class="foot">🌊 교육대학원 MT 검토 · 2026.06.27–28 · 제부도 신성민박펜션</div>
 </div>
 
@@ -338,19 +316,10 @@
   <a href="#schedule"><span class="ic">🕐</span>일정</a>
   <a href="#menu"><span class="ic">🍖</span>메뉴</a>
   <a href="#content"><span class="ic">🎯</span>컨텐츠</a>
-  <a href="#talk"><span class="ic">💬</span>의견</a>
 </nav>
-
-<div class="toast" id="toast"></div>
 
 <script>
 (function(){
-  var toastEl = document.getElementById('toast');
-  function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); setTimeout(function(){ toastEl.classList.remove('show'); },2600); }
-  function pad(n){ return (n<10?'0':'')+n; }
-  function fmt(ts){ if(!ts||!ts.toDate) return ''; var d=ts.toDate(); return pad(d.getMonth()+1)+'/'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes()); }
-  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-
   // 스크롤 시 현재 섹션 버튼 강조
   var navLinks = [].slice.call(document.querySelectorAll('.quicknav a'));
   if('IntersectionObserver' in window){
@@ -359,65 +328,6 @@
     }, {rootMargin:'-40% 0px -55% 0px'});
     document.querySelectorAll('section[id]').forEach(function(s){ io.observe(s); });
   }
-
-  // 의견 게시판 (HTML 고정 — 항상 보임)
-  var F = {
-    topic: document.getElementById('c-topic'),
-    name: document.getElementById('c-name'),
-    text: document.getElementById('c-text'),
-    submit: document.getElementById('c-submit'),
-    list: document.getElementById('c-list')
-  };
-
-  function showSetup(){
-    if(F.list) F.list.innerHTML = '<div class="cm-setup">💬 의견 기능 활성화 준비 중입니다. 곧 열려요!</div>';
-    if(F.submit) F.submit.disabled = true;
-  }
-
-  // ▼▼▼ Firebase 설정값 ▼▼▼
-  var firebaseConfig = {
-    apiKey: "AIzaSyBBthmZzkxRMaYgnIqeoNELuw2JPyxPd84",
-    authDomain: "mtgogo-13e6e.firebaseapp.com",
-    projectId: "mtgogo-13e6e",
-    storageBucket: "mtgogo-13e6e.firebasestorage.app",
-    messagingSenderId: "58814941767",
-    appId: "1:58814941767:web:768fe9adbb4b5fe7fcff62"
-  };
-  // ▲▲▲
-
-  if(!F.submit || String(firebaseConfig.apiKey).indexOf('PASTE') > -1){ showSetup(); return; }
-
-  function loadScript(src, cb){ var s=document.createElement('script'); s.src=src; s.onload=cb; s.onerror=function(){ showSetup(); }; document.head.appendChild(s); }
-
-  loadScript('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js', function(){
-    loadScript('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js', function(){
-      try {
-        firebase.initializeApp(firebaseConfig);
-        var db = firebase.firestore();
-        F.submit.addEventListener('click', function(){
-          var topic = F.topic.value || '전체/기타';
-          var name = (F.name.value||'').trim() || '익명';
-          var text = (F.text.value||'').trim();
-          if(!text){ toast('내용을 입력해주세요'); return; }
-          F.submit.disabled = true;
-          db.collection('comments').add({ topic:topic, name:name, text:text, ts: firebase.firestore.FieldValue.serverTimestamp() })
-            .then(function(){ F.text.value=''; toast('✅ 의견을 남겼습니다 — 셋이 함께 봅니다'); })
-            .catch(function(e){ toast('등록 실패 — 잠시 후 다시'); console.error(e); })
-            .then(function(){ F.submit.disabled = false; });
-        });
-        db.collection('comments').orderBy('ts').onSnapshot(function(snap){
-          var items = [];
-          snap.forEach(function(doc){ items.push(doc.data()); });
-          if(!items.length){ F.list.innerHTML = '<div class="cm-empty">아직 의견이 없어요. 먼저 남겨보세요!</div>'; return; }
-          items.reverse();
-          F.list.innerHTML = items.map(function(c){
-            var tp = String(c.topic||'기타').replace(/^s\d+:/,'');
-            return '<div class="cm-item"><span class="tm">'+fmt(c.ts)+'</span><span class="tp">'+esc(tp)+'</span><span class="nm">'+esc(c.name)+'</span><div class="tx">'+esc(c.text)+'</div></div>';
-          }).join('');
-        });
-      } catch(e){ console.error(e); showSetup(); }
-    });
-  });
 })();
 </script>
 </body>
