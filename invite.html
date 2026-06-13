@@ -59,15 +59,14 @@
   /* 달력 */
   .cal{background:linear-gradient(180deg,#f4fcff,#eaf7ff);border:2px solid #d6effb;border-radius:24px;padding:16px 14px;margin-bottom:18px;box-shadow:0 6px 16px rgba(90,160,200,.12);}
   .cal .ttl{text-align:center;font-weight:900;color:#2f8fb0;font-size:16px;margin-bottom:12px;}
-  .cal .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
-  .cal .dow{text-align:center;font-size:11px;font-weight:900;color:#a7bdc8;padding-bottom:4px;}
-  .cal .dow.s{color:#ff9b9b;} .cal .dow.t{color:#6db7e8;}
-  .cal .cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:13px;
-    font-weight:800;color:#80939f;border-radius:13px;}
-  .cal .cell.sun{color:#ffa3a3;}
-  .cal .cell.mt{background:linear-gradient(135deg,#ff7a59,#ffab6b);color:#fff;font-weight:900;
-    box-shadow:0 6px 14px rgba(255,122,89,.5);transform:scale(1.06);position:relative;animation:floaty 4s ease-in-out infinite;}
-  .cal .cell.mt::after{content:"💛";position:absolute;top:-11px;font-size:12px;}
+  .cal table{width:100%;border-collapse:separate;border-spacing:4px;table-layout:fixed;}
+  .cal th{font-size:11px;font-weight:900;color:#a7bdc8;padding-bottom:3px;text-align:center;}
+  .cal th.s{color:#ff9b9b;} .cal th.t{color:#6db7e8;}
+  .cal td{text-align:center;font-size:13px;font-weight:800;color:#80939f;height:40px;border-radius:13px;vertical-align:middle;}
+  .cal td.sun{color:#ffa3a3;}
+  .cal td.mt{background:linear-gradient(135deg,#ff7a59,#ffab6b);color:#fff;font-weight:900;
+    box-shadow:0 6px 14px rgba(255,122,89,.5);position:relative;}
+  .cal td.mt::after{content:"💛";position:absolute;top:-7px;left:50%;transform:translateX(-50%);font-size:11px;}
   .cal .badge{text-align:center;margin-top:13px;background:#fff;border:2px dashed #ffc59b;border-radius:15px;
     padding:8px;font-size:13.5px;font-weight:900;color:#e2683c;}
 
@@ -147,14 +146,16 @@
       <!-- 달력 -->
       <div class="cal">
         <div class="ttl">🗓️ 2026년 6월</div>
-        <div class="grid">
-          <div class="dow s">일</div><div class="dow">월</div><div class="dow">화</div><div class="dow">수</div><div class="dow">목</div><div class="dow">금</div><div class="dow t">토</div>
-          <div class="cell"></div><div class="cell">1</div><div class="cell">2</div><div class="cell">3</div><div class="cell">4</div><div class="cell">5</div><div class="cell">6</div>
-          <div class="cell sun">7</div><div class="cell">8</div><div class="cell">9</div><div class="cell">10</div><div class="cell">11</div><div class="cell">12</div><div class="cell">13</div>
-          <div class="cell sun">14</div><div class="cell">15</div><div class="cell">16</div><div class="cell">17</div><div class="cell">18</div><div class="cell">19</div><div class="cell">20</div>
-          <div class="cell sun">21</div><div class="cell">22</div><div class="cell">23</div><div class="cell">24</div><div class="cell">25</div><div class="cell">26</div><div class="cell mt">27</div>
-          <div class="cell mt">28</div><div class="cell">29</div><div class="cell">30</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-        </div>
+        <table>
+          <thead><tr><th class="s">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class="t">토</th></tr></thead>
+          <tbody>
+            <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+            <tr><td class="sun">7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+            <tr><td class="sun">14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+            <tr><td class="sun">21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td class="mt">27</td></tr>
+            <tr><td class="mt">28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
         <div class="badge">🌊 6/27(토) ~ 28(일) · 1박 2일</div>
       </div>
 
