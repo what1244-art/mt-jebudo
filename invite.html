@@ -147,8 +147,13 @@
       <!-- 달력 -->
       <div class="cal">
         <div class="ttl">🗓️ 2026년 6월</div>
-        <div class="grid" id="cal-grid">
+        <div class="grid">
           <div class="dow s">일</div><div class="dow">월</div><div class="dow">화</div><div class="dow">수</div><div class="dow">목</div><div class="dow">금</div><div class="dow t">토</div>
+          <div class="cell"></div><div class="cell">1</div><div class="cell">2</div><div class="cell">3</div><div class="cell">4</div><div class="cell">5</div><div class="cell">6</div>
+          <div class="cell sun">7</div><div class="cell">8</div><div class="cell">9</div><div class="cell">10</div><div class="cell">11</div><div class="cell">12</div><div class="cell">13</div>
+          <div class="cell sun">14</div><div class="cell">15</div><div class="cell">16</div><div class="cell">17</div><div class="cell">18</div><div class="cell">19</div><div class="cell">20</div>
+          <div class="cell sun">21</div><div class="cell">22</div><div class="cell">23</div><div class="cell">24</div><div class="cell">25</div><div class="cell">26</div><div class="cell mt">27</div>
+          <div class="cell mt">28</div><div class="cell">29</div><div class="cell">30</div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
         </div>
         <div class="badge">🌊 6/27(토) ~ 28(일) · 1박 2일</div>
       </div>
@@ -197,17 +202,6 @@
 
 <script>
 (function(){
-  // 달력 그리기 (2026년 6월: 1일=월요일, 27토·28일 하이라이트)
-  var grid=document.getElementById('cal-grid');
-  var startDow=1, html='';
-  for(var i=0;i<startDow;i++){ html+='<div class="cell"></div>'; }
-  for(var d=1; d<=30; d++){
-    var dow=(startDow+d-1)%7;
-    var cls='cell'+(dow===0?' sun':'')+((d===27||d===28)?' mt':'');
-    html+='<div class="'+cls+'">'+d+'</div>';
-  }
-  grid.insertAdjacentHTML('beforeend', html);
-
   var toastEl=document.getElementById('toast');
   function toast(m){ toastEl.textContent=m; toastEl.classList.add('show'); setTimeout(function(){toastEl.classList.remove('show');},2600); }
   function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
